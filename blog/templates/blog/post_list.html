@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog - Post List</title>
+</head>
+<body>
+<div class="topnav">
+    <div class="topnav-right">
+        {% if user.is_authenticated %}
+            <form action="{% url 'logout' %}" method="post" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        {% endif %}
+    </div>
+</div>
+
+    <h1>Blog - Post List</h1>
+    <ul>
+        {% for post in posts %}
+            <li><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'post_create' %}">Create New Post</a>
+</body>
+</html>
